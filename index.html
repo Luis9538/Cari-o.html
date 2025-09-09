@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Frases Cariñosas — Sonrisa</title>
+<style>
+  body {
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #d4fc79, #96e6a1);
+    font-family: 'Segoe UI', sans-serif;
+    overflow: hidden;
+    color: #fff;
+  }
+
+  h1 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+    text-shadow: 0 0 8px rgba(255,255,255,0.8);
+  }
+
+  .display {
+    font-size: 1.6rem;
+    font-weight: bold;
+    text-align: center;
+    max-width: 700px;
+    padding: 20px;
+    min-height: 100px;
+    text-shadow: 0 0 10px rgba(255,255,255,0.6);
+    opacity: 0;
+    transform: scale(0.9);
+    animation: fadeIn 0.5s forwards;
+  }
+
+  .accent {
+    color: #fff;
+    text-shadow: 0 0 5px #fff, 0 0 15px #00c3ff, 0 0 25px #00c3ff;
+    animation: glow 1.5s infinite alternate;
+  }
+
+  @keyframes glow {
+    from { text-shadow: 0 0 5px #fff, 0 0 15px #00c3ff; }
+    to { text-shadow: 0 0 10px #fff, 0 0 25px #00c3ff; }
+  }
+
+  @keyframes fadeIn {
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  .controls {
+    margin-top: 20px;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  button {
+    background: linear-gradient(45deg, #00c3ff, #3be8b0);
+    border: none;
+    color: #fff;
+    padding: 10px 16px;
+    font-size: 1rem;
+    cursor: pointer;
+    border-radius: 25px;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  }
+
+  button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+  }
+
+  /* Corazones flotando */
+  .heart {
+    position: absolute;
+    color: rgba(255,255,255,0.9);
+    animation: floatUp 5s linear forwards;
+  }
+
+  @keyframes floatUp {
+    0% { transform: translateY(0) scale(1); opacity: 1; }
+    100% { transform: translateY(-250px) scale(1.5); opacity: 0; }
+  }
+</style>
+</head>
+<body>
+
+<h1>🌟 Frases Cariñosas 🌟</h1>
+<div class="display" id="display"></div>
+
+<div class="controls">
+  <button onclick="showPhrase('/ánimo')">/ánimo</button>
+  <button onclick="showPhrase('/brillo')">/brillo</button>
+  <button onclick="showPhrase('/fuerza')">/fuerza</button>
+  <button onclick="showPhrase('/alegría')">/alegría</button>
+</div>
+
+<script>
+const phrases = {
+  "/ánimo": "Tu <span class='accent'>sonrisa</span> tiene el poder de levantar cualquier día.",
+  "/brillo": "Cuando muestras tu <span class='accent'>sonrisa</span>, todo a tu alrededor se ilumina.",
+  "/fuerza": "Esa <span class='accent'>sonrisa</span> tuya es pura energía positiva.",
+  "/alegría": "Tu <span class='accent'>sonrisa</span> contagia alegría a todos los que te rodean."
+};
+
+const display = document.getElementById('display');
+
+function showPhrase(cmd) {
+  display.style.animation = 'none';
+  void display.offsetWidth; // reinicia animación
+  display.innerHTML = phrases[cmd];
+  display.style.animation = 'fadeIn 0.5s forwards';
+  for (let i = 0; i < 4; i++) {
+    setTimeout(createHeart, i * 300);
+  }
+}
+
+function createHeart() {
+  const heart = document.createElement('div');
+  heart.className = 'heart';
+  heart.style.left = Math.random() * 100 + 'vw';
+  heart.style.bottom = '0px';
+  heart.style.fontSize = (Math.random() * 1.5 + 1) + 'rem';
+  heart.textContent = '💙';
+  document.body.appendChild(heart);
+  setTimeout(() => heart.remove(), 5000);
+}
+</script>
+
+</body>
+</html>
